@@ -1,18 +1,22 @@
 <script>
 import ProductCard from '@/components/ProductCard.vue';
 import Nav from '@/components/Nav.vue';
+import MOCK_DATA from '@/assets/MOCK_DATA.json';
 export default {
     components:{
         ProductCard,
         Nav,
+        MOCK_DATA,
     },
 
     data() {
         return {
-
+            arr:[],
         };
     },
-
+    mounted () {
+        this.arr = MOCK_DATA;
+    },
     methods: {
 
     },
@@ -32,19 +36,15 @@ export default {
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAAnCAYAAABEz7vjAAAABHNCSVQICAgIfAhkiAAAAhRJREFUaEPtmUFOwkAUQIdCF9BATDVhQ2DPBVhxAFZcQY+hxgQSdWXSRr2CB2DPBbgAHADCpglpIKi1tPX/2mkqtoE4mdiOneSnwwz9M2/+nw8zv0AELYUErqT2tC6Dtz+xfQD8TAW/m3ZACoRPKj5jdOIF0zRPKpXKueM4quu6aYfyAcbj8VO/319B1YnCRScvWZY1kGX5Jq3+FjcvMMalqqqP0GcHcG7UYggobbfbYblcvs4SmGEYD/V6/RbmbAVwCOZRi+GzuNlshoqiXGUJbLlcao1G4w7m/AbyQV0y82CLxUJvNpsUDK3m7zVRwO4B5jVwx+PBptMpATcNPbTT6YT19XpNZrMZd++tVquk3W7/GCew2O/AJpMJWa0won6VXq8X1rEd+3kXiHwkuqB0vBwsLioKazHebsain8kVWQbm/W4OFrfHMKTvdrtw8TFC0YLt2M+7lEolUqvV8nB/1D8PYaOisGDC7jHegYFFfx7us3bQZLKYsMEjB2OJAgfe5XIeE/YEzdEQzKqZggfz6BwV5GAZ/R0T715xPp8PWq3WM3h74k2wNBqNzrrd7oVt26eQcZHgEClx3B7Mqj3PM3Vdf9E0zQBl7yB4Gv52d4+DIEQRRA4E69iW1nQS5sMQAm9+MdMSm21BMJrwQyAKRduZV5eDApr0QzAKGCb//kVGM7qoaXW/JMMfzEFz8Ji/UfkJKvo4RlxPWowAAAAASUVORK5CYII=" class="mr-1" alt="條列顯示">
         </div>
     </div>
-    <div class="w-screen h-screen flex justify-center items-center">
+    <div class="w-full h-screen flex justify-center items-center">
 <div class="w-11/12 h-4/6 flex gap-5 flex-wrap justify-center">
 <!-- 叫出商品卡 -->
-<ProductCard productName="Bytecard" content="Immunization not carried out because of caregiver refusal" price="954"/>
-<ProductCard/>
-<ProductCard/>
-<ProductCard/>
-<ProductCard/>
+<ProductCard v-for="card in arr" :key="card.id" :productName="card.name" :content="card.description" :price="card.price"/>
 </div>
 </div>
 </div>
 
-    </main>
+</main>
 </template>
 
 <style scoped></style>

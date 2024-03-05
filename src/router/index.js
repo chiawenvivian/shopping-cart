@@ -19,7 +19,7 @@ const router = createRouter({
       component: OrderView,
     },
     {
-      path: '/product',
+      path: '/',
       name: 'product',
       component: ProductView,
     },
