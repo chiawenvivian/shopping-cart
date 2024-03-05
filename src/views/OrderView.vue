@@ -86,16 +86,49 @@ export default {
         </div>
     </div>
     <div class="mb-6 px-5">
-      <PublicLabel2 content="姓名" required>
-            <input v-model="formData.name" type="text" class="border border-white text-black">
+        <PublicLabel2 content="姓名" required>
+            <input type="text" class="border border-white text-black">
+        </PublicLabel2>    
+    </div>
+    <div class="mb-6 px-5">
+        <PublicLabel2 content="電話" required>
+            <input type="text" class="border border-white text-black">
+        </PublicLabel2>
+    </div>
+    <div class="mb-6 px-5">
+        <PublicLabel2 content="地址" required>
+            <input type="text" class="border border-white text-black">
+        </PublicLabel2>
+    </div>
+    <div class="mb-6 px-5">
+        <PublicLabel2 content="信箱" required>
+            <input type="text" class="border border-white text-black">
         </PublicLabel2>
     </div>
     </div>
+    <div class="mb-6 px-5">
+        <label for="paymentMethod" class="block mb-2 text-lg font-bold">付款方式</label>
+        <div class="flex gap-5"><div class="flex items-center"><input type="radio" id="paymentMethod1" class="mr-2" required="" value="信用卡"><label for="paymentMethod1">信用卡</label></div><div class="flex items-center"><input type="radio" id="paymentMethod2" class="mr-2" required="" value="貨到付款"><label for="paymentMethod2">貨到付款</label></div></div>
+    </div>
+    <div class="mb-6 px-5">
+        <label for="shippingMethod" class="block mb-2 text-lg font-bold">運送方式</label>
+        <div class="flex gap-5">
+            <div class="flex items-center">
+                <input type="radio" id="shippingMethod1" class="mr-2" required="" value="宅配">
+                <label for="shippingMethod1">宅配</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="shippingMethod2" class="mr-2" required="" value="超商取貨">
+                <label for="shippingMethod2">超商取貨</label>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-2xl font-bold w-full text-end">商品數量: 1</h2>
+    <h2 class="text-2xl font-bold w-full text-end">商品金額: $954</h2>
     <div class="flex justify-between gap-4">
         <PublicBtn content="回上頁繼續購買" color="bg-blue-500"/>
     <PublicBtn content="確認送出" color="bg-green-500"/>
     </div>
-
     </main>
 </template>
 

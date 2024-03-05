@@ -2,6 +2,7 @@
 import ProductCard from '@/components/ProductCard.vue';
 import Nav from '@/components/Nav.vue';
 import PublicBtn from '@/components/PublicBtn.vue';
+
 export default {
     components:{
         ProductCard,
