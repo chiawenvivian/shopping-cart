@@ -104,7 +104,7 @@ export default {
       <div class="flex items-center"></div>
     </div>
   </div>
-  <a href="#/shopping" class="flex justify-center items-center bg-[#50468c] text-white rounded-md px-4 py-1 cursor-pointer md:p-0"><span> 回首頁 </span></a>
+  <RouterLink to="/"><a href="#/shopping" class="flex justify-center items-center bg-[#50468c] text-white rounded-md px-4 py-1 cursor-pointer md:p-0"><span> 回首頁 </span></a></RouterLink>
     </main>
 </template>
 

@@ -72,8 +72,8 @@ export default {
     
     </div>
     <div class="flex justify-between gap-4">
-        <PublicBtn content="回上頁繼續購買" color="bg-blue-500"/>
-    <PublicBtn content="確認購買" color="bg-green-500"/>
+        <RouterLink to="/"><PublicBtn content="回上頁繼續購買" color="bg-blue-500"/></RouterLink>
+        <RouterLink to="/order"><PublicBtn content="確認購買" color="bg-green-500"/></RouterLink>
     </div>
 
     </main>

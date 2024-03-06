@@ -126,8 +126,8 @@ export default {
     <h2 class="text-2xl font-bold w-full text-end">商品數量: 1</h2>
     <h2 class="text-2xl font-bold w-full text-end">商品金額: $954</h2>
     <div class="flex justify-between gap-4">
-        <PublicBtn content="回上頁繼續購買" color="bg-blue-500"/>
-    <PublicBtn content="確認送出" color="bg-green-500"/>
+        <RouterLink to="/shoppingcart"><PublicBtn content="回上頁繼續購買" color="bg-blue-500"/></RouterLink>
+        <RouterLink to="/checkinfo"><PublicBtn content="確認送出" color="bg-green-500"/></RouterLink>
     </div>
     </main>
 </template>

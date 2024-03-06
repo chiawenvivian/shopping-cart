@@ -16,8 +16,8 @@ export default {
 
 <template>
   <div class="w-full items-center px-1 bg-black text-yellow-200 fixed top-0 flex justify-between h-[40px]">
-    <span class="text-yellow">shopping</span>
-    <button type="button" class="bg-gray-200 w-[30px] h-[30px] flex justify-center items-center">🛒</button>
+    <RouterLink to="/"><span class="text-yellow">shopping</span></RouterLink>
+    <RouterLink to="/shoppingcart"><button type="button" class="bg-gray-200 w-[30px] h-[30px] flex justify-center items-center rounded-2xl">🛒</button></RouterLink>
 </div>
 </template>
 
