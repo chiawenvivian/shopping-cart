@@ -42,10 +42,10 @@ export default {
             <div class="gird-td flex justify-center items-center"> {{price}}</div>
             <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
                 <label>
-                  <button type="">✚</button>
+                  <button type="button">✚</button>
                     <input type="number" value="1" class="text-black
-                    text-center w-[40px]">
-                    <button type="">−</button>
+                    text-center w-[40px] rounded-md">
+                    <button type="button">−</button>
                 </label>
                 <button type="button" class="lex justify-center items-center gap-x-2 bg-[#50468c] text-white rounded-b-lg px-4 py-1">🛒加入購物車</button>
             </div>

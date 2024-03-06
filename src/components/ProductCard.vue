@@ -17,11 +17,12 @@ export default {
   },
   data(){
     return{
-
+      
     };
   },
   methods: {
-  },
+    
+},
 }
 </script>
 
@@ -40,7 +41,7 @@ export default {
       -
     </button>
     <label class="border border-gray-400 border-x-0 border-y-1 grow h-[35px] flex justify-center items-center text-xl text-center">
-      <input type="number" min="1" value="1" class="h-[30px] w-[80px] border-0 p-0 text-center text-black">
+      <input type="number" min="1" value="1" class="h-[30px] w-[60px] border-0 p-0 text-center text-black rounded-md">
     </label>
     <button type="button" class="count-btn rounded-r-full">
       +
