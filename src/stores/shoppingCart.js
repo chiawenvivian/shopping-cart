@@ -21,6 +21,23 @@ export const useShoppingCart = defineStore ('shopingcart', {
     },
     // 共用函示
     actions: {
-
+        // 商品加入購物車
+        addCart(product){
+        const existProduct = this.existProduct(product);
+        // 如果已存在商品則修改數量，沒有則新增
+        if (existProduct) {
+        existProduct.quantity = product.quantity;
+        } else {
+        this.cartData.push(product);
+        }
+        },
+        /**
+     * 找出cartData內已存在的產品
+     * @param {object} product 產品資料
+     * @returns 回傳cartData內已存在的產品資料
+     */
+    existProduct(product) {
+        return this.cartData.find(item => item.id === product.id);
+      },
     },
 });

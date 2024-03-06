@@ -1,12 +1,17 @@
 <script>
+import { mapActions } from 'pinia';
+import { useShoppingCart } from '@/stores/shoppingCart';
 import ProductCard from '@/components/ProductCard.vue';
+import CountButton from '@/components/CountButton.vue';
 import ProductList from '@/components/ProductList.vue';
 import Nav from '@/components/Nav.vue';
 import MOCK_DATA from '@/assets/MOCK_DATA.json';
 
+
 export default {
     components:{
         ProductCard,
+        CountButton,
         ProductList,
         Nav,
         MOCK_DATA,
@@ -16,13 +21,21 @@ export default {
         return {
             arr:[],
             layout:'grid',
+            // productData: [],
         };
     },
     mounted () {
         this.arr = MOCK_DATA;
+        // this.fetchData();
     },
     methods: {
-
+        // 拿資料的fn
+        // fetchData(){
+        //     fetch('./assets/MOCK_DATA.json')
+        //     .then(res => res.json())
+        //     .then(res => this.productData = res);
+        // },
+        ...mapActions(useShoppingCart, ['addCart']),
     },
 }
 </script>
@@ -66,14 +79,28 @@ export default {
                 <div class="flex justify-center items-center text-center text-white font-bold"></div>
             </div>
         </div>
-    <productList v-for="card in arr" :key="card.id" :productName="card.name" :content="card.description" :price="card.price"/></div>
+    <productList v-for="product in arr" :key="product.id" :product="product">
+        <div class="flex justify-center items-center">
+        <span class="text-md mt-3">數量：</span>
+        <CountButton :quantity="product.quantity" class="text-black mt-2 ml-2 w-[100px] h-[35px]" @update="(newValue) => product.quantity = newValue"/>
+    </div>
+    </ProductList>
+</div>
     
         
 <!-- 商品卡呈現 -->
 <div class="w-full h-screen flex justify-center mt-3" v-if="layout=='grid'">
 <div class="w-11/12 h-4/6 flex gap-5 flex-wrap justify-center">
 <!-- 叫出商品卡 -->
-<ProductCard v-for="card in arr" :key="card.id" :productName="card.name" :content="card.description" :price="card.price"/>
+<!-- 因為組件禮物件叫做product故這裡也要用同樣名稱不然找不到 -->
+<ProductCard v-for="product in arr" :key="product.id" :product="product">
+    <div class="flex justify-center items-center">
+        <span class="text-md mt-3">數量：</span>
+        <CountButton :quantity="product.quantity" class="text-black mt-2 ml-2 w-[100px] h-[35px]" @update="(newValue) => product.quantity = newValue"/>
+            <!-- 在父層先通過訊號說 要得到新的值，並且將產品新的值改成帶進來的新值 -->
+    </div>
+</ProductCard>
+
 </div>
 </div>
 </div>

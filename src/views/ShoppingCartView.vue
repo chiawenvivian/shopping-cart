@@ -2,12 +2,14 @@
 import ProductCard from '@/components/ProductCard.vue';
 import Nav from '@/components/Nav.vue';
 import PublicBtn from '@/components/PublicBtn.vue';
+import CountButton from '@/components/CountButton.vue';
 
 export default {
     components:{
         ProductCard,
         Nav,
         PublicBtn,
+        CountButton,
     },
 
     data() {

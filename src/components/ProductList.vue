@@ -1,26 +1,28 @@
-<!-- 統一做一個商品列表組件 -->
 <script>
+import { mapActions } from 'pinia';
+import { useShoppingCart } from '@/stores/shoppingCart';
+import iconShoppingCart from '@/assets/images/icon-shopping-cart.svg';
+import CountButton from '@/components/CountButton.vue';
+
 export default {
+  components: {
+    CountButton,
+  },
   props: {
-    productName:{
-      type: String,
-      defaul:'',
-    },
-    content:{
-      type: String,
-      defaul:'',
-    },
-    price:{
-      type: Number,
-      defaul:'',
+    product: {
+      type:Object,
+      default:'',
     },
   },
   data(){
     return{
-
+      imgIcon: {
+        iconShoppingCart,
+      },
     };
   },
   methods: {
+    ...mapActions(useShoppingCart, ['addCart']),
   },
 }
 </script>
@@ -31,23 +33,22 @@ export default {
                 
             </div>
             <div class="flex justify-center">
-                <img src="https://dummyimage.com/100x100" alt="商品圖示" class="w-[100px] h-full object-cover">
+                <img :src="product.pic" alt="商品圖示" class="w-[100px] h-full object-cover">
             </div>
             <div class="flex items-center">
-                {{ productName }}
+                {{ product.name }}
             </div>
             <div class="flex items-center">
-                {{ content }}
+                {{ product.description }}
             </div>
-            <div class="gird-td flex justify-center items-center"> {{price}}</div>
+            <div class="gird-td flex justify-center items-center"> {{product.price}}</div>
             <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
-                <label>
-                  <button type="button">✚</button>
-                    <input type="number" value="1" class="text-black
-                    text-center w-[40px] rounded-md">
-                    <button type="button">−</button>
-                </label>
-                <button type="button" class="lex justify-center items-center gap-x-2 bg-[#50468c] text-white rounded-b-lg px-4 py-1">🛒加入購物車</button>
+              <slot/>
+
+              <button type="button" class="flex justify-center items-center gap-x-2 bg-[#50468c] text-white rounded-lg ml-2 px-4 py-1" @click="addCart(product)">
+              <img :src="imgIcon.iconShoppingCart" alt="購物車圖示" width="20">
+              <span> {{ existProduct(product) ? '已經加入購物車' :'加入購物車' }} </span>
+              </button>
             </div>
         </div>
 </template>
