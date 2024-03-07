@@ -1,5 +1,8 @@
 <script>
+import { mapState } from 'pinia';
+import { useShoppingCart } from '@/stores/shoppingCart';
 import ProductCard from '@/components/ProductCard.vue';
+import ProductList from '@/components/ProductList.vue';
 import Nav from '@/components/Nav.vue';
 import PublicBtn from '@/components/PublicBtn.vue';
 import CountButton from '@/components/CountButton.vue';
@@ -7,6 +10,7 @@ import CountButton from '@/components/CountButton.vue';
 export default {
     components:{
         ProductCard,
+        ProductList,
         Nav,
         PublicBtn,
         CountButton,
@@ -16,6 +20,9 @@ export default {
         return {
 
         };
+    },
+    computed: {
+    ...mapState(useShoppingCart, ['cartData']),
     },
 
     methods: {
@@ -34,42 +41,31 @@ export default {
         <h1 class="mb-3 text-3xl font-bold text-white">購物車確認</h1>
     </div>
     <div class="mb-6 px-5">
-        <div class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
-            <div class="flex justify-center">
+        <div class="grid grid-cols-6 border-y font-bold py-1 gap-x-3">
+        <div></div>
+        <div class="text-center">商品圖片</div>
+        <div>商品名稱</div>
+        <div class="text-center">價錢</div>
+        <div>操作</div>
+      </div>
+        <div v-for="product in cartData" :key="product.id" class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
+            <!-- <div class="flex justify-center">
                 <input type="checkbox" class="w-5">
-            </div>
+            </div> -->
             <div class="flex justify-center">
-                <img src="https://dummyimage.com/100x100" alt="商品圖示" class="w-[100px] h-full object-cover">
+                <img :src="product.pic" alt="商品圖示" class="w-[100px] h-full object-cover">
             </div>
             <div class="flex items-center">
-                Alphazap
+               {{ product.name }}
             </div>
-            <div class="gird-td flex justify-center items-center"> $776</div>
+            <div class="gird-td flex justify-center items-center"> {{ product.price }}</div>
             <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
                 <label>
-                    <input type="number" value="1" class="text-black
-                    text-center">
+                    <CountButton :quantity="product.quantity" class="text-black mt-2 ml-2 w-[100px] h-[35px]" @update="(newValue) => product.quantity = newValue"/>
                 </label>
             </div>
         </div>
-        <div class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
-            <div class="flex justify-center">
-                <input type="checkbox" class="w-5">
-            </div>
-            <div class="flex justify-center">
-                <img src="https://dummyimage.com/100x100" alt="商品圖示" class="w-[100px] h-full object-cover">
-            </div>
-            <div class="flex items-center">
-                Bytecard
-            </div>
-            <div class="gird-td flex justify-center items-center"> $954</div>
-            <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
-                <label>
-                    <input type="number" value="1" class="text-black
-                    text-center">
-                </label>
-            </div>
-        </div>
+        
     </div>
     
     </div>
