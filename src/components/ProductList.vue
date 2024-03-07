@@ -22,7 +22,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useShoppingCart, ['addCart']),
+    ...mapActions(useShoppingCart, ['addCart', 'existProduct']),
   },
 }
 </script>
