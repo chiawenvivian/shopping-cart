@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'pinia';
+import { mapState, mapActions} from 'pinia';
 import { useShoppingCart } from '@/stores/shoppingCart';
 import ProductCard from '@/components/ProductCard.vue';
 import ProductList from '@/components/ProductList.vue';
@@ -23,12 +23,32 @@ export default {
     },
     computed: {
     ...mapState(useShoppingCart, ['cartData']),
+
+    // 新的陣列需要產生有check的cartdata
+    // 這邊被污染了！！！！
+    newCartData(){
+        // 不要改動原本的資料，要長出一個新的陣列(不要修改到原始資料！)
+        const arr = this.cartData.map(product => {
+            product.checked = false;
+            return product;
+        });
+        return arr;
+    },
     },
 
     methods: {
+        ...mapActions(useShoppingCart, ['addCheckedData', 'countTotal']),
 
+        submitCart(){
+            this.$router.push('/order');
+        },
+        
+        changeChecked(product){
+            product.checked = !product.checked;
+            this.addCheckedData(product);
+        },
     },
-}
+};
 </script>
 
 <template>
@@ -48,10 +68,10 @@ export default {
         <div class="text-center">價錢</div>
         <div>操作</div>
       </div>
-        <div v-for="product in cartData" :key="product.id" class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
-            <!-- <div class="flex justify-center">
-                <input type="checkbox" class="w-5">
-            </div> -->
+        <div v-for="product in newCartData" :key="product.id" class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
+            <div class="flex justify-center">
+                <input type="checkbox" class="w-5" @change="changeChecked(product)">
+            </div>
             <div class="flex justify-center">
                 <img :src="product.pic" alt="商品圖示" class="w-[100px] h-full object-cover">
             </div>
@@ -68,12 +88,18 @@ export default {
         
     </div>
     
-    </div>
-    <div class="flex justify-between gap-4">
-        <RouterLink to="/"><PublicBtn content="回上頁繼續購買" color="bg-blue-500"/></RouterLink>
-        <RouterLink to="/order"><PublicBtn content="確認購買" color="bg-green-500"/></RouterLink>
+    <div class="flex justify-end flex-wrap mb-2">
+      <p class="text-2xl text-end font-bold w-full">商品數量: {{ countTotal().count }}</p>
+      <p class="text-2xl text-end font-bold w-full">商品總金額: $ {{ countTotal().price }}</p>
     </div>
 
+    </div>
+    <div class="flex justify-between gap-4">
+        <RouterLink to="/">
+            <PublicBtn content="回上頁繼續購買" color="bg-blue-500"/>
+        </RouterLink>
+        <PublicBtn content="確認購買" color="bg-green-500" @click="submitCart()"/>
+    </div>
     </main>
 </template>
 

@@ -7,6 +7,8 @@ export const useShoppingCart = defineStore ('shopingcart', {
         return{
             // 放進購物車的商品，會有很多資訊用陣列包起來
             cartData: [],
+            // 打勾確定要買的品項，要另外設一個變數
+            checkedData:[],
             // 有明確的資料分類就用物件
             buyerData: {
                 name:'',
@@ -39,5 +41,30 @@ export const useShoppingCart = defineStore ('shopingcart', {
     existProduct(product) {
         return this.cartData.find(item => item.id === product.id);
       },
+
+      addCheckedData(product){
+        if (product.checked){
+            this.checkedData.push(product);
+        } else{
+            this.checkedData = this.checkedData.filter(item => item.id !== product.id);
+        }
+        },
+
+        // 計算數量跟總金額
+        countTotal(){
+            let count = 0;
+            let price = 0;
+            this.checkedData.forEach(item =>{
+                count += item.quantity;
+                price += (item.quantity * item.price);
+            });
+            // 回傳一個物件裡面包含兩個key
+            return { count: count, price: price };
+        },
+        
+        resetCartData() {
+            this.cartData = [];
+        },
+      },
     },
-});
+);

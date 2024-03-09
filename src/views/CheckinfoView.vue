@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'pinia';
+import { useShoppingCart } from '@/stores/shoppingCart';
 import ProductCard from '@/components/ProductCard.vue';
 import Nav from '@/components/Nav.vue';
 import PublicBtn from '@/components/PublicBtn.vue';
@@ -16,9 +18,13 @@ export default {
 
         };
     },
+    
+    computed:{
+        ...mapState(useShoppingCart,['checkedData','buyerData'])
+    },
 
     methods: {
-
+        
     },
 }
 </script>
@@ -48,42 +54,26 @@ export default {
                 <div class="flex justify-center items-center text-center text-white font-bold">數量</div>
             </div>
         </div>
-        <div class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
+        <div v-for="product in checkedData" :key="product.id" class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
             <div class="flex justify-center">
                 
             </div>
             <div class="flex justify-center">
-                <img src="https://dummyimage.com/100x100" alt="商品圖示" class="w-[100px] h-full object-cover">
+                <img :src="product.pic" class="w-[100px] h-full object-cover">
             </div>
             <div class="flex items-center">
-                Alphazap
+             {{ product.name }}
             </div>
-            <div class="gird-td flex justify-center items-center"> $776</div>
+            <div class="gird-td flex justify-center items-center"> 
+                {{ product.price }}
+            </div>
             <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
-                <label>
-                    <input type="number" value="1" class="text-black
-                    text-center">
-                </label>
+                <p class="flex justify-center items-center">
+                    {{ product.quantity }}
+                </p>
             </div>
         </div>
-        <div class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
-            <div class="flex justify-center">
-                
-            </div>
-            <div class="flex justify-center">
-                <img src="https://dummyimage.com/100x100" alt="商品圖示" class="w-[100px] h-full object-cover">
-            </div>
-            <div class="flex items-center">
-                Bytecard
-            </div>
-            <div class="gird-td flex justify-center items-center"> $954</div>
-            <div class="gird-td flex justify-center items-center lg:flex-wrap lg:!justify-between lg:pt-6 md:!pt-0">
-                <label>
-                    <input type="number" value="1" class="text-black
-                    text-center">
-                </label>
-            </div>
-        </div>
+       
     </div>
   </div>
   <div class="mb-6 px-5">
@@ -96,12 +86,12 @@ export default {
       <div class="gird-th">運送方式</div>
     </div>
     <div class="grid-tr grid-cols-6 grid py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
-      <div class="flex items-center"></div>
-      <div class="flex items-center"></div>
-      <div class="flex items-center"></div>
-      <div class="flex items-center"></div>
-      <div class="flex items-center"></div>
-      <div class="flex items-center"></div>
+      <div class="flex items-center">{{ buyerData.name }}</div>
+      <div class="flex items-center">{{ buyerData.phone }}</div>
+      <div class="flex items-center">{{ buyerData.address }}</div>
+      <div class="flex items-center">{{ buyerData.payment }}</div>
+      <div class="flex items-center">{{ buyerData.email }}</div>
+      <div class="flex items-center">{{ buyerData.delivery }}</div>
     </div>
   </div>
   <RouterLink to="/"><a href="#/shopping" class="flex justify-center items-center bg-[#50468c] text-white rounded-md px-4 py-1 cursor-pointer md:p-0"><span> 回首頁 </span></a></RouterLink>
