@@ -27,7 +27,7 @@ export default {
         ...mapActions(useShoppingCart,['countTotal','resetCartData']),
 
         submitCart(){
-            this.restCartData();
+            this.resetCartData();
             this.$router.push('/checkinfo');
         },
     },
@@ -127,9 +127,9 @@ export default {
         <RouterLink to="/shoppingcart">
             <PublicBtn content="回上頁繼續購買" color="bg-blue-500"/>
         </RouterLink>
-        <RouterLink to="/checkinfo">
-            <PublicBtn content="確認送出" color="bg-green-500"/>
-        </RouterLink>
+        <!-- <RouterLink to="/checkinfo"> -->
+            <PublicBtn content="確認送出" color="bg-green-500" @click="submitCart()"/>
+        <!-- </RouterLink> -->
     </div>
 </form>
     </div>

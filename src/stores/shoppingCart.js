@@ -32,6 +32,9 @@ export const useShoppingCart = defineStore ('shopingcart', {
         } else {
         this.cartData.push(product);
         }
+        // 把資料放進去localstorage
+        const datainfo = JSON.stringify(this.cartData);
+        localStorage.setItem('datainfo', datainfo);
         },
         /**
      * 找出cartData內已存在的產品
@@ -64,6 +67,8 @@ export const useShoppingCart = defineStore ('shopingcart', {
         
         resetCartData() {
             this.cartData = [];
+            const datainfo = JSON.stringify(this.cartData);
+            localStorage.setItem('datainfo', datainfo);
         },
       },
     },
