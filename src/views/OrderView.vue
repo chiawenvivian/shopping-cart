@@ -24,7 +24,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useShoppingCart,['countTotal','restCartData']),
+        ...mapActions(useShoppingCart,['countTotal','resetCartData']),
 
         submitCart(){
             this.restCartData();
